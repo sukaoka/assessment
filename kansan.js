@@ -12,22 +12,19 @@
     
     //TODO 平均艇速の算出
 
-    //heikin 平均亭速
-    
    
-
     assesmentButton.onclick = () =>{
         // TODO無効な値の時の処理
+        
         // 画面をリセット
         removeAllChildren(resultDivided);
-
         //換算距離を出す
         //係数=250mは0.09, 500mは0.2, 1000mは0.375, 1500mが0.475?、2000m以上？が0.5
         let keisuu = 0
-        if (dist.value*1 <=499){keisuu = 0.09
-        } else if(dist.value*1 <=999){keisuu = 0.2
-        } else if(dist.value*1 <=1499){keisuu = 0.375
-        } else if(dist.value*1 <=1999){keisuu = 0.475
+        if (dist.value*1 <=499){keisuu = - 0.02 + dist.value*1 * (0.11/250)
+        } else if(dist.value*1 <=999){keisuu = 0.025 + dist.value*1 * (0.175/500)
+        } else if(dist.value*1 <=1499){keisuu = 0.175 + dist.value*1 * (1/5000)
+        } else if(dist.value*1 <=1999){keisuu = 0.45 + dist.value*1 * (0.025/500)
         } else {keisuu = 0.5};
        // console.log(keisuu)
         //換算距離を出す (1+(本数-1)*係数)*距離
@@ -38,7 +35,7 @@
         const paragraph0 = document.createElement('p');
         const paragraph1 = document.createElement('p');
         const paragraph2 = document.createElement('p');
-        paragraph0.innerText = 'これは' +kyori+'[m]相当のメニューです。'
+        paragraph0.innerText = 'これは' +kyori+'m相当のメニューです。'
         resultDivided.appendChild(paragraph0);
         const result = '私は'+kyori+'m相当のメニューにて、2000m換算'+assessment(timeketsugou(Number(min.value),Number(sec.value),Number(comma.value)) ,kyori,2000)+'/500mの艇速を出し、圧倒的成長を遂げました。';
         console.log(result)
